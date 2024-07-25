@@ -1,0 +1,110 @@
+body {
+  /* background-color: cadetblue; */
+  /* min-height: 2000vh; */
+}
+header {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("./assets/images/landing-page/Logo_Frame.png");
+  background-position-x: right;
+  background-repeat: no-repeat;
+  background-size: 40%;
+}
+.underline {
+  position: relative;
+}
+.underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 16px;
+  bottom: -8px;
+  left: 4px;
+  background-image: url("./assets/images/landing-page/underline.svg");
+  background-position-x: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.car--animation {
+  max-width: 90%;
+  animation: changeWidth 2s;
+}
+@media (max-width: 768px) {
+  .car--animation {
+    animation: changeWidth2 2s;
+  }
+}
+@keyframes changeWidth {
+  0% {
+    max-width: 20%;
+  }
+  100% {
+    max-width: 90%;
+  }
+}
+@keyframes changeWidth2 {
+  0% {
+    max-width: 20%;
+  }
+  100% {
+    max-width: 90%;
+  }
+}
+.bi-star-fill {
+  color: #efbf14;
+}
+.audicar__box {
+  background-image: url("./Vector.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+.testimonial h3 {
+  position: relative;
+  width: fit-content;
+  margin-inline: auto;
+}
+.testimonial h3::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+
+  left: 120%;
+  bottom: 100%;
+  transform: translateY(30%);
+  background-image: url("./bg-sec6.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.testimonial h3::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  right: 120%;
+  bottom: 100%;
+  transform: translateY(70%) rotate(180deg);
+  background-image: url("./bg-sec6.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+@media (max-width: 768px) {
+  .testimonial h3::after {
+    display: none;
+  }
+  .testimonial h3::before {
+    display: none;
+  }
+}
