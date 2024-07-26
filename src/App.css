@@ -1,7 +1,3 @@
-body {
-  /* background-color: cadetblue; */
-  /* min-height: 2000vh; */
-}
 header {
   position: relative;
 }
@@ -63,7 +59,7 @@ body::before {
   color: #efbf14;
 }
 .audicar__box {
-  background-image: url("./Vector.png");
+  background-image: url("./assets/images/sec-5/Vector.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center left;
@@ -82,7 +78,7 @@ body::before {
   left: 120%;
   bottom: 100%;
   transform: translateY(30%);
-  background-image: url("./bg-sec6.png");
+  background-image: url("./assets/images/landing-page/bg-sec6.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -95,7 +91,7 @@ body::before {
   right: 120%;
   bottom: 100%;
   transform: translateY(70%) rotate(180deg);
-  background-image: url("./bg-sec6.png");
+  background-image: url("./assets/images/landing-page/bg-sec6.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -106,5 +102,32 @@ body::before {
   }
   .testimonial h3::before {
     display: none;
+  }
+}
+
+/* ////////////// */
+.car--animationX {
+  max-width: 100%;
+  animation: changeWidthX 3s;
+}
+@media (max-width: 768px) {
+  .car--animationX {
+    animation: changeWidthX2 3s;
+  }
+}
+@keyframes changeWidthX {
+  0% {
+    max-width: 20%;
+  }
+  100% {
+    max-width: 100%;
+  }
+}
+@keyframes changeWidthX2 {
+  0% {
+    max-width: 20%;
+  }
+  100% {
+    max-width: 100%;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchSection = ({ searchByNameOrTitle }) => {
+const SearchSection = ({ searchByNameOrTitle, limit }) => {
   const [searchText, setSearchText] = useState("");
   return (
     <>
@@ -21,7 +21,7 @@ const SearchSection = ({ searchByNameOrTitle }) => {
           />
           <button
             onClick={() => {
-              searchByNameOrTitle(searchText);
+              searchByNameOrTitle(searchText, limit);
             }}
             className="btn btn-primary"
             type="button"

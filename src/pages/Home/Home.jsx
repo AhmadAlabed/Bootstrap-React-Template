@@ -7,51 +7,63 @@ import SearchSection from "../../components/SearchSection/SearchSection";
 import PopularCars from "../../components/PopularCars/PopularCars";
 import HowWork from "../../components/HowWork/HowWork";
 import Vendors from "../../components/Vendors/Vendors";
+import WhyUS from "../../components/WhyUS/WhyUS";
+import Testimonial from "../../components/Testimonial/Testimonial";
 
 const Home = () => {
   const [cars, setCars] = useState([]);
   // const [searchText, setSearchText] = useState("");
-  const getLimiltCars = async function (limilt) {
+  const getlimitCars = async function (limit) {
     try {
       let { data } = await axios.get(
-        `https://freetestapi.com/api/v1/cars?limit=${limilt}`
+        `https://freetestapi.com/api/v1/cars?limit=${limit}`
       );
       setCars(data);
     } catch (error) {
       console.log(error);
     }
   };
-  const searchByNameOrTitle = async function (text) {
-    if (text == "") {
-      getLimiltCars(4);
-      return;
-    }
+  const searchByNameOrTitle = async function (text, limit) {
     try {
-      let { data } = await axios.get(`https://freetestapi.com/api/v1/cars`);
-      let newDate = data.filter((ele) => {
-        if (
-          ele.make.toLowerCase().includes(text.toLowerCase()) ||
-          ele.model.toLowerCase().includes(text.toLowerCase())
-        )
-          return true;
-        return false;
-      });
-      setCars(newDate);
+      let { data } = await axios.get(
+        `https://freetestapi.com/api/v1/cars?search=${text}&limit=${limit}`
+      );
+      setCars(data);
     } catch (error) {
       console.log(error);
     }
+    // if (text == "") {
+    //   getlimitCars(4);
+    //   return;
+    // }
+    // try {
+    //   let { data } = await axios.get(`https://freetestapi.com/api/v1/cars`);
+    //   let newDate = data.filter((ele) => {
+    //     if (
+    //       ele.make.toLowerCase().includes(text.toLowerCase()) ||
+    //       ele.model.toLowerCase().includes(text.toLowerCase())
+    //     )
+    //       return true;
+    //     return false;
+    //   });
+    //   setCars(newDate);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   useEffect(() => {
-    getLimiltCars(4);
+    getlimitCars(4);
   }, []);
   return (
     <>
       <Navbar />
       <Header />
-      <SearchSection searchByNameOrTitle={searchByNameOrTitle} />
+      <SearchSection searchByNameOrTitle={searchByNameOrTitle} limit={4} />
       <PopularCars cars={cars} />
       <HowWork />
       <Vendors />
+      <WhyUS />
+      <Testimonial />
       {/* <div className="input-group mb-3 shadow">
         <span className="input-group-text">
           <i className="bi bi-geo-alt-fill"></i>

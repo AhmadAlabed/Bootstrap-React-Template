@@ -1,7 +1,9 @@
 // External Library
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchSection from "../../components/SearchSection/SearchSection";
+import Cars from "../../components/Cars/Cars";
 
 const AllVehicles = () => {
   // State
@@ -10,7 +12,7 @@ const AllVehicles = () => {
   const [totalPages, setTotalPages] = useState(1);
   //Static
   const totalItems = 30;
-  const itemsPerPage = 10;
+  const itemsPerPage = 16;
   const calcTotalPages = () => {
     setTotalPages(Math.ceil(totalItems / itemsPerPage));
   };
@@ -45,10 +47,10 @@ const AllVehicles = () => {
     if (currentPage == 1) return;
     setCurrentPage(currentPage - 1);
   };
-  const getLimiltCars = async function (limilt) {
+  const getlimitCars = async function (limit) {
     try {
       let { data } = await axios.get(
-        `https://freetestapi.com/api/v1/cars?limit=${limilt}`
+        `https://freetestapi.com/api/v1/cars?limit=${limit}`
       );
       setCars(
         data.slice(calcStartEndIndex().startIndex, calcStartEndIndex().endIndex)
@@ -57,46 +59,65 @@ const AllVehicles = () => {
       console.log(error);
     }
   };
+  const searchByNameOrTitle = async function (text, limit) {
+    try {
+      let { data } = await axios.get(
+        `https://freetestapi.com/api/v1/cars?search=${text}&limit=${limit}`
+      );
+      setCars(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     calcTotalPages();
-    // getLimiltCars(itemsPerPage);
   }, []);
   useEffect(() => {
-    getLimiltCars(calcStartEndIndex().endIndex);
-    console.log(calcStartEndIndex().endIndex, calcStartEndIndex().startIndex);
+    getlimitCars(calcStartEndIndex().endIndex);
   }, [currentPage]);
-  useEffect(() => {
-    console.log(cars);
-  }, [cars]);
 
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/home">Home</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Cars
-          </li>
-        </ol>
-      </nav>
+      <div className=" container mt-5">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/home">Home</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Cars
+            </li>
+          </ol>
+        </nav>
+        {/* ------------------------------------------------ */}
+        <SearchSection
+          searchByNameOrTitle={searchByNameOrTitle}
+          limit={calcStartEndIndex().endIndex}
+        />
+        {/* ------------------------------------------------ */}
+        <Cars cars={cars} />
+        {/* ------------------------------------------------ */}
+        <nav
+          aria-label="Page navigation example"
+          className="d-flex justify-content-center"
+        >
+          <ul className="pagination">
+            <li className="page-item">
+              <button onClick={previousPage} className="page-link">
+                Previous
+              </button>
+            </li>
+            {pages()}
+            <li className="page-item">
+              <button onClick={nextPage} className="page-link">
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
       {/* ------------------------------------------------ */}
-      <nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className="page-item">
-            <button onClick={previousPage} className="page-link">
-              Previous
-            </button>
-          </li>
-          {pages()}
-          <li className="page-item">
-            <button onClick={nextPage} className="page-link">
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
     </>
   );
 };

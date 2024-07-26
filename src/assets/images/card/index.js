@@ -6,6 +6,7 @@ import car3 from "./car3.png";
 import star from "./star.png";
 import user from "./user.png";
 import Frame from "./Frame.png";
+import doors from "./doors.png";
 export default {
   Airconditioning,
   calendar,
@@ -15,4 +16,5 @@ export default {
   star,
   user,
   Frame,
+  doors,
 };
