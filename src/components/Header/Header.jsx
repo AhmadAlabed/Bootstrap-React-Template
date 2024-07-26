@@ -1,5 +1,7 @@
 import React from "react";
 import car from "../../assets/images/landing-page/car.png";
+import andriod from "../../assets/images/landing-page/andriod.png";
+import ios from "../../assets/images/landing-page/ios.png";
 const Header = () => {
   return (
     <>
@@ -16,6 +18,14 @@ const Header = () => {
                   Get a car wherever and whenever you need it with your IOS and
                   Android device.
                 </p>
+                <div className="d-flex">
+                  <a href="#" className="p-2">
+                    <img src={andriod} alt="" />
+                  </a>
+                  <a href="#" className="p-2">
+                    <img src={ios} alt="" />
+                  </a>
+                </div>
               </div>
             </div>
             <div className="col-12 col-md-8 text-end">

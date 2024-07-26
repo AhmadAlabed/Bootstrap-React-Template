@@ -1,8 +1,8 @@
-header {
-  position: relative;
+body {
+  /* position: relative; */
 }
 
-body::before {
+header::before {
   content: "";
   position: absolute;
   top: 0px;

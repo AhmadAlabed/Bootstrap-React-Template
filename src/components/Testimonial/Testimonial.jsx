@@ -7,7 +7,7 @@ import star from "../../assets/images/card/star.png";
 const Testimonial = () => {
   return (
     <>
-      <section className="testimonial text-center py-5">
+      <section className="testimonial text-center py-5 overflow-hidden">
         <button className="mb-3 btn btn-outline-primary text-uppercase">
           testimonial
         </button>
@@ -46,7 +46,7 @@ const Testimonial = () => {
                         <div className="col-4">
                           <img
                             src={man1}
-                            className="img-fluid rounded-start h-100 object-fit-cover"
+                            className="img-fluid rounded-start h-100  object-fit-cover"
                             alt="man"
                           />
                         </div>
@@ -175,7 +175,7 @@ const Testimonial = () => {
                       <div className="row g-0">
                         <div className="col-4">
                           <img
-                            src={girl}
+                            src={man1}
                             className="img-fluid rounded-start h-100 object-fit-cover"
                             alt="man"
                           />
