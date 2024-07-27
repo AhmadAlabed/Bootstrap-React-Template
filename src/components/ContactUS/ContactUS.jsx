@@ -1,8 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import andriod from "../../assets/images/landing-page/andriod.png";
 import ios from "../../assets/images/landing-page/ios.png";
 import iPhone14 from "../../assets/images/landing-page/iPhone-14.png";
+import axios from "axios";
 const ContactUS = () => {
+  const [info, setInfo] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+  const [errMsg, setErrMsg] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+  const [successMsg, setSuccessMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const getInfo = function (e) {
+    const newInfo = { ...info };
+    newInfo[e.target.name] = e.target.value;
+    setInfo(newInfo);
+  };
+  const sentInfo = async function () {
+    try {
+      setIsLoading(true);
+      let { data } = await axios.post(
+        "http://upskilling-egypt.com:3001/contact",
+        info
+      );
+      setErrMsg({
+        name: "",
+        phone: "",
+        email: "",
+      });
+      setSuccessMsg(data.message);
+      setIsLoading(false);
+    } catch (error) {
+      let errorsMsg = {
+        name: "",
+        phone: "",
+        email: "",
+      };
+
+      error.response.data.errors.forEach((ele) => {
+        errorsMsg[ele.path] = ele.msg;
+      });
+      setErrMsg(errorsMsg);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <section className="pt-5">
@@ -29,13 +76,15 @@ const ContactUS = () => {
                   id="name"
                   placeholder="Name"
                   name="name"
+                  onChange={getInfo}
                 />
                 <input
-                  type="number"
+                  type="text"
                   className="form-control bg-primary-subtle my-2 rounded-4"
                   id="phone"
                   placeholder="Phone Number"
                   name="phone"
+                  onChange={getInfo}
                 />
                 <input
                   type="email"
@@ -43,9 +92,28 @@ const ContactUS = () => {
                   id="email"
                   placeholder="Email"
                   name="email"
+                  onChange={getInfo}
                 />
               </div>
-              <button className="btn btn-primary px-5 mb-5 rounded-4">
+              <p className="small text-danger m-0">{errMsg.name}</p>
+              <p className="small text-danger m-0">{errMsg.phone}</p>
+              <p className="small text-danger m-0">{errMsg.email}</p>
+              <p className="small text-danger m-0">{errMsg.email}</p>
+              <p className=" text-success">{successMsg}</p>
+              <button
+                className="btn btn-primary px-5 mb-5 rounded-4 position-relative"
+                onClick={sentInfo}
+              >
+                <div
+                  className={
+                    isLoading
+                      ? "spinner-border position-absolute"
+                      : "spinner-border position-absolute d-none"
+                  }
+                  role="status"
+                >
+                  <span className="visually-hidden"></span>
+                </div>
                 Send
               </button>
             </div>
